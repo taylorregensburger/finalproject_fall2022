@@ -4,7 +4,7 @@
 
 Nick Bertel
 Taylor Regensburger
-Anika Villivalam
+Anika Vilivalam
 
 #### Your section leader's name
 
