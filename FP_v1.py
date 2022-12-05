@@ -2,8 +2,6 @@ import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
 
-#this is just setting up the data frame, only need to change the line highlited
-
 intro = str(input("Would you like to learn more about stocks? Enter Y if Yes or N if No:"))
 if intro == "Y":
     tickerstring = str(input("Input a Ticker Symbol:"))
@@ -11,7 +9,7 @@ if intro == "Y":
     pd.options.display.max_columns= None
     pd.set_option('display.max_rows', 3000)
     pd.set_option('display.max_columns', 3000)
-    tick = yf.Ticker(tickerstring)#change this line to a ticker "amzn" and such
+    tick = yf.Ticker(tickerstring)
     dict = tick.info
     df = pd.DataFrame.from_dict(dict,orient='index')
     df = df.reset_index()
@@ -20,15 +18,13 @@ else:
     quit()
 
 
-#sector = dict['sector']
-
 def module_1 ():
     price = dict['currentPrice']
     price = round(price,2)
     print("\n""The current price of", tickerstring,"is $",price,".", "As a beginner investor, it is easy to assume that evaluating the Company's current trading price is the""\n""primary place to start. However, calculating a Company's valuation multiples provides a clearer indication of a Company's underlying fundamentals.""\n""You will see the price chart when you have completed all the modules!""\n")
-    periodlength = str(input("Input a length of time for the graph(1y,6mo,2wk,5d):"))
+    periodlength = str(input("Input a length of time for the graph(1y,6mo,2wk,5d,etc):"))
     tickhist = tick.history(period=periodlength)
-    tickhist['Close'].plot(title="apple stock price")
+    tickhist['Close'].plot(title=tickerstring+" Price Graph")
 
 
 def module_2 ():
@@ -48,13 +44,10 @@ def module_2 ():
     y = print(tickerstring,"is a", sector,"company. For each sector, there are different ratios to value the company. For this company, the ratio used is a",z, ".")
     if sector in ['Communication Services', 'Consumer Cyclical', 'Consumer Defensive', 'Healthcare', 'Technology']:
         x = print("Price to Earnings Ratio is", round(priceToEarnings,2),"x" "\n")
-        z = 'Price to Earnings Ratio'
     if sector in ['Basic Materials', 'Energy', 'Industrials', 'Utilities']:
         x = print("EV/EBITDA Ratio is",round(evToEbitda,2),"x" "\n")
-        z = 'EV to EBITDA Ratio'
     if sector in ['Financial Services','Real Estate']:
         x = print("Price to Book Ratio is",round(priceToBook,2),"x" "\n")
-        z = 'Price to Book Ratio'
     return (y,x)
 
 def module_3 ():
@@ -75,21 +68,19 @@ def module_5():
     else:
         print("Okay thank you for your honest feedback. We are always looking to improve!")
 
-second_Step= input("Would you like to learn about the Company's current price?")
+second_Step= input("Would you like to learn about the Company's current price? Enter Y if Yes or N if No:")
 if second_Step == "Y":
     module_1()
-third_Step = input("Would you like to learn about a way to value a company based on the industry it is in?")
+third_Step = input("Would you like to learn about a way to value a company based on the industry it is in? Enter Y if Yes or N if No:")
 if third_Step == "Y":
     module_2()
-fourth_Step = input("Would you like to learn about earnings?")
+fourth_Step = input("Would you like to learn about earnings? Enter Y if Yes or N if No:")
 if fourth_Step == "Y":
     module_3()
-fifth_Step = input("Would you like to learn about how analysts rate the Company's future performance?")
+fifth_Step = input("Would you like to learn about how analysts rate the Company's future performance? Enter Y if Yes or N if No:")
 if fifth_Step == "Y":
     module_4()
 module_5()
 
 plt.show()
-
-#print(df)
 
